@@ -10,9 +10,9 @@ class Block {
 
 	constructor(data){
 		this.id = 0;
-        this.nonce = 144444;
-      	this.body = data;
-      	this.hash = "";
+		this.nonce = 144444;
+		this.body = data;
+		this.hash = "";
     }
     
     /**
@@ -24,10 +24,15 @@ class Block {
      */
   	// 
   	generateHash() {
-      	// Use this to create a temporary reference of the class object
-      	let self = this;
-        //Implement your code here
-        
+		// Use this to create a temporary reference of the class object
+		let self = this;
+		
+		var promise = new Promise(function(resolve, reject) {
+			self.hash = SHA256(JSON.stringify(self))
+			resolve(self);
+		});		
+		
+		return promise;
     }
 }
 
